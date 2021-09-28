@@ -1,0 +1,3 @@
+/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/CMakeFiles/Travel_agency_project.dir

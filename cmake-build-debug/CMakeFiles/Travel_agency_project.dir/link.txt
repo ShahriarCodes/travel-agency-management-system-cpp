@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Travel_agency_project.dir/main.cpp.o -o Travel_agency_project 
