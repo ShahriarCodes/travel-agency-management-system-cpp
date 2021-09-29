@@ -142,6 +142,59 @@ Travel_agency_project/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Travel_agency_project.dir/build.make CMakeFiles/Travel_agency_project.dir/build
 .PHONY : Travel_agency_project/fast
 
+#=============================================================================
+# Target rules for targets named genID
+
+# Build rule for target.
+genID: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 genID
+.PHONY : genID
+
+# fast build rule for target.
+genID/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genID.dir/build.make CMakeFiles/genID.dir/build
+.PHONY : genID/fast
+
+#=============================================================================
+# Target rules for targets named test
+
+# Build rule for target.
+test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
+.PHONY : test
+
+# fast build rule for target.
+test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+.PHONY : test/fast
+
+generateID.o: generateID.cpp.o
+
+.PHONY : generateID.o
+
+# target to build an object file
+generateID.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genID.dir/build.make CMakeFiles/genID.dir/generateID.cpp.o
+.PHONY : generateID.cpp.o
+
+generateID.i: generateID.cpp.i
+
+.PHONY : generateID.i
+
+# target to preprocess a source file
+generateID.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genID.dir/build.make CMakeFiles/genID.dir/generateID.cpp.i
+.PHONY : generateID.cpp.i
+
+generateID.s: generateID.cpp.s
+
+.PHONY : generateID.s
+
+# target to generate assembly for a file
+generateID.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genID.dir/build.make CMakeFiles/genID.dir/generateID.cpp.s
+.PHONY : generateID.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -169,6 +222,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Travel_agency_project.dir/build.make CMakeFiles/Travel_agency_project.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+test.o: test.cpp.o
+
+.PHONY : test.o
+
+# target to build an object file
+test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.o
+.PHONY : test.cpp.o
+
+test.i: test.cpp.i
+
+.PHONY : test.i
+
+# target to preprocess a source file
+test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.i
+.PHONY : test.cpp.i
+
+test.s: test.cpp.s
+
+.PHONY : test.s
+
+# target to generate assembly for a file
+test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
+.PHONY : test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -178,9 +258,17 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Travel_agency_project"
+	@echo "... genID"
+	@echo "... test"
+	@echo "... generateID.o"
+	@echo "... generateID.i"
+	@echo "... generateID.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... test.o"
+	@echo "... test.i"
+	@echo "... test.s"
 .PHONY : help
 
 
