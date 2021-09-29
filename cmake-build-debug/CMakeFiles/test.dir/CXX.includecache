@@ -6,11 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/sal/CLionProjects/Travel_agency_project/generateID.cpp
+/home/sal/CLionProjects/Travel_agency_project/test.cpp
 iostream
 /home/sal/CLionProjects/Travel_agency_project/iostream
 ctime
 /home/sal/CLionProjects/Travel_agency_project/ctime
 string
 /home/sal/CLionProjects/Travel_agency_project/string
+vector
+/home/sal/CLionProjects/Travel_agency_project/vector
 
