@@ -130,32 +130,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Travel_agency_project
-
-# Build rule for target.
-Travel_agency_project: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Travel_agency_project
-.PHONY : Travel_agency_project
-
-# fast build rule for target.
-Travel_agency_project/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Travel_agency_project.dir/build.make CMakeFiles/Travel_agency_project.dir/build
-.PHONY : Travel_agency_project/fast
-
-#=============================================================================
-# Target rules for targets named genID
-
-# Build rule for target.
-genID: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 genID
-.PHONY : genID
-
-# fast build rule for target.
-genID/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/genID.dir/build.make CMakeFiles/genID.dir/build
-.PHONY : genID/fast
-
-#=============================================================================
 # Target rules for targets named test
 
 # Build rule for target.
@@ -168,13 +142,26 @@ test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+#=============================================================================
+# Target rules for targets named Travel_agency_project
+
+# Build rule for target.
+Travel_agency_project: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Travel_agency_project
+.PHONY : Travel_agency_project
+
+# fast build rule for target.
+Travel_agency_project/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Travel_agency_project.dir/build.make CMakeFiles/Travel_agency_project.dir/build
+.PHONY : Travel_agency_project/fast
+
 generateID.o: generateID.cpp.o
 
 .PHONY : generateID.o
 
 # target to build an object file
 generateID.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/genID.dir/build.make CMakeFiles/genID.dir/generateID.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/generateID.cpp.o
 .PHONY : generateID.cpp.o
 
 generateID.i: generateID.cpp.i
@@ -183,7 +170,7 @@ generateID.i: generateID.cpp.i
 
 # target to preprocess a source file
 generateID.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/genID.dir/build.make CMakeFiles/genID.dir/generateID.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/generateID.cpp.i
 .PHONY : generateID.cpp.i
 
 generateID.s: generateID.cpp.s
@@ -192,7 +179,7 @@ generateID.s: generateID.cpp.s
 
 # target to generate assembly for a file
 generateID.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/genID.dir/build.make CMakeFiles/genID.dir/generateID.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/generateID.cpp.s
 .PHONY : generateID.cpp.s
 
 main.o: main.cpp.o
@@ -258,7 +245,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Travel_agency_project"
-	@echo "... genID"
 	@echo "... test"
 	@echo "... generateID.o"
 	@echo "... generateID.i"
