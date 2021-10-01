@@ -21,6 +21,9 @@ const int DEER = 2;
 const int MONKEY = 3;
 const int CAT = 4;
 const int SNAKE = 5;
+const int NUM_ANIMALS = 5;
+const int MAX_GEN = 100;
+
 
 const int UP = 10;
 const int DOWN = -10;
@@ -214,7 +217,12 @@ void board(vector<int> position) {
     }
 }
 
-class Tiger {
+
+class Animal {
+
+};
+
+class Tiger : public Animal {
 public:
     // i == y, j == x
     //    int current_i, current_j;
@@ -223,86 +231,160 @@ public:
     vector<int> tigerNewPos;
     bool dead = false;
 
-    void moveTiger() {
+    void move() {
         // tiger moves clockwise
         // vector<int> tigerInitialPos{10, 10};
 
         int randDir, nextDir;
 
-        board(tigerInitialPos);
+        // board(tigerInitialPos);
 
         randDir = generateRandomDirection();
         tigerNewPos = tigerPosition.determineNewPosition(tigerInitialPos, 5, randDir);
-//        board(tigerNewPos);
-//        sleep(1);
+        // board(tigerNewPos);
+        // sleep(1);
 
         nextDir = determineNextAfterRandomDirection(randDir, CLOCK_WISE);
         tigerNewPos = tigerPosition.determineNewPosition(tigerInitialPos, 2, nextDir);
-//        board(tigerNewPos);
-//        sleep(1);
 
-//        board(tigerInitialPos);
-//
-//        randDir = generateRandomDirection();
-//        tigerNewPos = determineNewPosition(tigerInitialPos, 5, randDir);
-//        board(tigerNewPos);
-//        sleep(1);
-//
-//        nextDir = determineNextAfterRandomDirection(randDir, CLOCK_WISE);
-//        tigerNewPos = determineNewPosition(tigerInitialPos, 2, nextDir);
-//        board(tigerNewPos);
-//        sleep(1);
+    }
+};
 
-//    tigerNewPos = determineNewPosition(tigerInitialPos, 5, LEFT);
-//    board(tigerNewPos);
-//    sleep(1);
-//
-//    tigerNewPos = determineNewPosition(tigerInitialPos, 5, UP);
-//    board(tigerNewPos);
-//    sleep(1);
-//
-//    tigerNewPos = determineNewPosition(tigerInitialPos, 5, RIGHT);
-//    board(tigerNewPos);
-//    sleep(1);
+class Deer : public Animal {
+public:
+    // i == y, j == x
+    //    int current_i, current_j;
+    Position deerPosition = Position();
+    vector<int> deerInitialPos = generateRandomPosition();
+    vector<int> deerNewPos;
+    bool dead = false;
+
+    void move() {
+        // dear moves anti_clockwise
+        // vector<int> tigerInitialPos{10, 10};
+
+        int randDir, nextDir;
+
+        randDir = generateRandomDirection();
+        deerNewPos = deerPosition.determineNewPosition(deerInitialPos, 6, randDir);
+        // board(tigerNewPos);
+        // sleep(1);
+
+        nextDir = determineNextAfterRandomDirection(randDir, COUNTER_CLOCK_WISE);
+        deerNewPos = deerPosition.determineNewPosition(deerInitialPos, 3, nextDir);
+
+    }
+};
+
+class Monkey : public Animal {
+public:
+    // i == y, j == x
+    //    int current_i, current_j;
+    Position monkeyPosition = Position();
+    vector<int> monkeyInitialPos = generateRandomPosition();
+    vector<int> monkeyNewPos;
+    bool dead = false;
+
+    void move() {
+        // tiger moves clockwise
+        // vector<int> tigerInitialPos{10, 10};
+
+        int randDir, nextDir;
+
+        // board(tigerInitialPos);
+
+        randDir = generateRandomDirection();
+        monkeyNewPos = monkeyPosition.determineNewPosition(monkeyInitialPos, 7, randDir);
+        // board(tigerNewPos);
+        // sleep(1);
+
+        nextDir = determineNextAfterRandomDirection(randDir, CLOCK_WISE);
+        monkeyNewPos = monkeyPosition.determineNewPosition(monkeyInitialPos, 1, nextDir);
 
     }
 };
 
 
-vector<char> stringSplit(string str, char del) {
-    // declaring temp string to store the curr "word" upto del
-    string temp = "";
-    vector<string> vec;
+class Cat : public Animal {
+public:
+    // i == y, j == x
+    //    int current_i, current_j;
+    Position catPosition = Position();
+    vector<int> catInitialPos = generateRandomPosition();
+    vector<int> catNewPos;
+    bool dead = false;
 
-    for (char i : str) {
-        // If cur char is not del, then append it to the cur "word", otherwise
-        // you have completed the word, print it, and start a new word.
-        if (i != del) {
-            temp += i;
-        } else {
-//            cout << temp << " ";
-            vec.push_back(temp);
-            temp = "";
-        }
+    void move() {
+        // dear moves anti_clockwise
+        // vector<int> tigerInitialPos{10, 10};
+
+        int randDir, nextDir;
+
+        randDir = generateRandomDirection();
+        catNewPos = catPosition.determineNewPosition(catInitialPos, 2, randDir);
+        // board(tigerNewPos);
+        // sleep(1);
+
+        nextDir = determineNextAfterRandomDirection(randDir, COUNTER_CLOCK_WISE);
+        catNewPos = catPosition.determineNewPosition(catInitialPos, 1, nextDir);
+
     }
+};
 
-//    cout << temp;
-}
+
+class Snake : public Animal {
+public:
+    // i == y, j == x
+    //    int current_i, current_j;
+    Position snakePosition = Position();
+    vector<int> snakeInitialPos = generateRandomPosition();
+    vector<int> snakeNewPos;
+    bool dead = false;
+
+    void move() {
+        // dear moves anti_clockwise
+        // vector<int> tigerInitialPos{10, 10};
+
+        int randDir, nextDir;
+
+        randDir = generateRandomDirection();
+        snakeNewPos = snakePosition.determineNewPosition(snakeInitialPos, 2, randDir);
+        // board(tigerNewPos);
+        // sleep(1);
+
+        nextDir = determineNextAfterRandomDirection(randDir, COUNTER_CLOCK_WISE);
+        snakeNewPos = snakePosition.determineNewPosition(snakeInitialPos, 1, nextDir);
+    }
+};
 
 int main() {
     vector<vector<Tiger>> vec;
+    vector<vector<Animal>> super_vec;
+    vector<Animal> tigerVec, deerVec, monkeyVec, catVec, snakeVec;
 
-    for (int i = 0; i < MAX_HEIGHT; i++) {
-        vector<Tiger> v1;
-        v1.reserve(MAX_WIDTH);
-        for (int j = 0; j < MAX_WIDTH; j++) {
-            v1.emplace_back(Tiger());
+    for (int i = 0; i < NUM_ANIMALS; i++) {
+        int random_gen = generateRandomNumberBetween(1,MAX_GEN);
+        tigerVec.reserve(random_gen);
+        deerVec.reserve(random_gen);
+        monkeyVec.reserve(random_gen);
+        catVec.reserve(random_gen);
+        snakeVec.reserve(random_gen);
+        for (int j = 0; j < random_gen; j++) {
+            if(i == 0) tigerVec.push_back(Tiger());
+            else if(i == 1) deerVec.push_back(Deer());
+            else if(i == 2) monkeyVec.emplace_back(Monkey());
+            else if(i == 3) catVec.emplace_back(Cat());
+            else if(i == 4) snakeVec.emplace_back(Snake());
         }
-        vec.push_back(v1);
     }
+    super_vec.push_back(tigerVec);
+    super_vec.push_back(deerVec);
+    super_vec.push_back(monkeyVec);
+    super_vec.push_back(catVec);
+    super_vec.push_back(snakeVec);
 
+    // print the vector
     for (int i = 0; i < MAX_HEIGHT; i++) {
-
         for (int j = 0; j < MAX_WIDTH; j++) {
             cout << "(" << vec[i][j].tigerInitialPos[0] << "," << vec[i][j].tigerInitialPos[1] << ") ";
 //            cout << vec[i][j].tigerInitialPos[0] << " ";
@@ -360,6 +442,26 @@ int main() {
     cout << "dead_count" << dead_count << endl;
 }
 
+
+vector<char> stringSplit(string str, char del) {
+    // declaring temp string to store the curr "word" upto del
+    string temp = "";
+    vector<string> vec;
+
+    for (char i : str) {
+        // If cur char is not del, then append it to the cur "word", otherwise
+        // you have completed the word, print it, and start a new word.
+        if (i != del) {
+            temp += i;
+        } else {
+//            cout << temp << " ";
+            vec.push_back(temp);
+            temp = "";
+        }
+    }
+
+//    cout << temp;
+}
 
 
 //    int i = 0;
