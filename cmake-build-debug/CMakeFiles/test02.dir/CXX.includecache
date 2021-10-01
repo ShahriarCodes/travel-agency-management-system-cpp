@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/sal/CLionProjects/Travel_agency_project/test02.cpp
+iostream
+-
+unistd.h
+-
+set
+-
+cstring
+-
+cstdlib
+/home/sal/CLionProjects/Travel_agency_project/cstdlib
+vector
+/home/sal/CLionProjects/Travel_agency_project/vector
+ctime
+/home/sal/CLionProjects/Travel_agency_project/ctime
+random
+/home/sal/CLionProjects/Travel_agency_project/random
+

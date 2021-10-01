@@ -219,7 +219,10 @@ void board(vector<int> position) {
 
 
 class Animal {
-
+public:
+    virtual void move() {
+        cout << "from parent";
+    }
 };
 
 class Tiger : public Animal {
@@ -231,7 +234,7 @@ public:
     vector<int> tigerNewPos;
     bool dead = false;
 
-    void move() {
+    void move() override {
         // tiger moves clockwise
         // vector<int> tigerInitialPos{10, 10};
 
@@ -240,12 +243,12 @@ public:
         // board(tigerInitialPos);
 
         randDir = generateRandomDirection();
-        tigerNewPos = tigerPosition.determineNewPosition(tigerInitialPos, 5, randDir);
+        this->tigerNewPos = tigerPosition.determineNewPosition(tigerInitialPos, 5, randDir);
         // board(tigerNewPos);
         // sleep(1);
 
         nextDir = determineNextAfterRandomDirection(randDir, CLOCK_WISE);
-        tigerNewPos = tigerPosition.determineNewPosition(tigerInitialPos, 2, nextDir);
+        this->tigerNewPos = tigerPosition.determineNewPosition(tigerNewPos, 2, nextDir);
 
     }
 };
@@ -259,7 +262,7 @@ public:
     vector<int> deerNewPos;
     bool dead = false;
 
-    void move() {
+    void move() override {
         // dear moves anti_clockwise
         // vector<int> tigerInitialPos{10, 10};
 
@@ -271,7 +274,7 @@ public:
         // sleep(1);
 
         nextDir = determineNextAfterRandomDirection(randDir, COUNTER_CLOCK_WISE);
-        deerNewPos = deerPosition.determineNewPosition(deerInitialPos, 3, nextDir);
+        deerNewPos = deerPosition.determineNewPosition(deerNewPos, 3, nextDir);
 
     }
 };
@@ -285,7 +288,7 @@ public:
     vector<int> monkeyNewPos;
     bool dead = false;
 
-    void move() {
+    void move() override {
         // tiger moves clockwise
         // vector<int> tigerInitialPos{10, 10};
 
@@ -299,7 +302,7 @@ public:
         // sleep(1);
 
         nextDir = determineNextAfterRandomDirection(randDir, CLOCK_WISE);
-        monkeyNewPos = monkeyPosition.determineNewPosition(monkeyInitialPos, 1, nextDir);
+        monkeyNewPos = monkeyPosition.determineNewPosition(monkeyNewPos, 1, nextDir);
 
     }
 };
@@ -314,7 +317,7 @@ public:
     vector<int> catNewPos;
     bool dead = false;
 
-    void move() {
+    void move() override {
         // dear moves anti_clockwise
         // vector<int> tigerInitialPos{10, 10};
 
@@ -326,8 +329,7 @@ public:
         // sleep(1);
 
         nextDir = determineNextAfterRandomDirection(randDir, COUNTER_CLOCK_WISE);
-        catNewPos = catPosition.determineNewPosition(catInitialPos, 1, nextDir);
-
+        catNewPos = catPosition.determineNewPosition(catNewPos, 1, nextDir);
     }
 };
 
@@ -341,7 +343,7 @@ public:
     vector<int> snakeNewPos;
     bool dead = false;
 
-    void move() {
+    void move() override {
         // dear moves anti_clockwise
         // vector<int> tigerInitialPos{10, 10};
 
@@ -353,210 +355,310 @@ public:
         // sleep(1);
 
         nextDir = determineNextAfterRandomDirection(randDir, COUNTER_CLOCK_WISE);
-        snakeNewPos = snakePosition.determineNewPosition(snakeInitialPos, 1, nextDir);
+        snakeNewPos = snakePosition.determineNewPosition(snakeNewPos, 1, nextDir);
+
+        snakeNewPos = snakePosition.determineNewPosition(snakeNewPos, 2, randDir);
+
+        nextDir = determineNextAfterRandomDirection(randDir, COUNTER_CLOCK_WISE);
+        snakeNewPos = snakePosition.determineNewPosition(snakeNewPos, 1, nextDir);
     }
 };
 
 int main() {
     vector<vector<Tiger>> vec;
     vector<vector<Animal>> super_vec;
-    vector<Animal> tigerVec, deerVec, monkeyVec, catVec, snakeVec;
+    vector<Tiger> tigerVec;
+    vector<Deer> deerVec;
+    vector<Monkey> monkeyVec;
+    vector<Cat> catVec;
+    vector<Snake> snakeVec;
+//    deerVec, monkeyVec, catVec, snakeVec;
 
+    // initialize animals vector
     for (int i = 0; i < NUM_ANIMALS; i++) {
-        int random_gen = generateRandomNumberBetween(1,MAX_GEN);
+        int random_gen = generateRandomNumberBetween(1, MAX_GEN);
         tigerVec.reserve(random_gen);
         deerVec.reserve(random_gen);
         monkeyVec.reserve(random_gen);
         catVec.reserve(random_gen);
         snakeVec.reserve(random_gen);
         for (int j = 0; j < random_gen; j++) {
-            if(i == 0) tigerVec.push_back(Tiger());
-            else if(i == 1) deerVec.push_back(Deer());
-            else if(i == 2) monkeyVec.emplace_back(Monkey());
-            else if(i == 3) catVec.emplace_back(Cat());
-            else if(i == 4) snakeVec.emplace_back(Snake());
+            if (i == 0) tigerVec.emplace_back(Tiger());
+            else if (i == 1) deerVec.emplace_back(Deer());
+            else if (i == 2) monkeyVec.emplace_back(Monkey());
+            else if (i == 3) catVec.emplace_back(Cat());
+            else if (i == 4) snakeVec.emplace_back(Snake());
         }
     }
-    super_vec.push_back(tigerVec);
-    super_vec.push_back(deerVec);
-    super_vec.push_back(monkeyVec);
-    super_vec.push_back(catVec);
-    super_vec.push_back(snakeVec);
+//    super_vec.push_back(tigerVec);
+//    super_vec.push_back(deerVec);
+//    super_vec.push_back(monkeyVec);
+//    super_vec.push_back(catVec);
+//    super_vec.push_back(snakeVec);
 
-    // print the vector
-    for (int i = 0; i < MAX_HEIGHT; i++) {
-        for (int j = 0; j < MAX_WIDTH; j++) {
-            cout << "(" << vec[i][j].tigerInitialPos[0] << "," << vec[i][j].tigerInitialPos[1] << ") ";
-//            cout << vec[i][j].tigerInitialPos[0] << " ";
-        }
-        cout << "\n";
+    // run simulation
+    vector<vector<vector<int>>> new_pos_vec;
+    vector<vector<int>> temp_pos_vec1, temp_pos_vec2, temp_pos_vec3, temp_pos_vec4, temp_pos_vec5;
+    for (auto & i : tigerVec) {
+        i.move();
+        temp_pos_vec1.emplace_back(i.tigerNewPos);
     }
+    new_pos_vec.emplace_back(temp_pos_vec1);
+//    temp_pos_vec.clear();
 
-    vector<vector<Tiger>> vec2 = vec;
-    vector<string> string_vec;
-    vector<vector<int>> pos_vec;
-
-    //Cycling through the vec the first time.
-    for (int i = 0; i < MAX_HEIGHT; i++) {
-        for (int j = 0; j < MAX_WIDTH; j++) {
-            // Cycling through the vec the second time
-            for (int x = 0; x < MAX_HEIGHT; x++) {
-                for (int y = 0; y < MAX_WIDTH; y++) {
-                    if (i == x && j == y) { continue; }
-                    if (vec[i][j].tigerInitialPos == vec[x][y].tigerInitialPos) {
-                        printf("match [%d][%d] =  [%d][%d]", i, j, x, y);
-                        vector<int> v1;
-                        v1.push_back(i);
-                        v1.push_back(j);
-                        pos_vec.push_back(v1);
-//                        string_vec.push_back(to_string(i) + "_" + to_string(j));
-//                        string_vec.push_back(to_string(i) + "_" + to_string(j));
-                    }
-                }
-            }
-        }
+    for (auto & i : deerVec) {
+        i.move();
+        temp_pos_vec2.emplace_back(i.deerNewPos);
     }
+    new_pos_vec.emplace_back(temp_pos_vec2);
+////    temp_pos_vec.clear();
 
-    int dead_count = 0;
-    for (int i = 0; i < MAX_HEIGHT; i++) {
-        for (int j = 0; j < MAX_WIDTH; j++) {
-            if (vec[i][j].dead) dead_count++;
-        }
+    for (auto & i : monkeyVec) {
+        i.move();
+        temp_pos_vec3.emplace_back(i.monkeyNewPos);
     }
-
-    cout << endl << "dead_count" << dead_count << endl;
-
-    // make them dead
-    for (auto it : pos_vec) {
-        int i = it[0];
-        int j = it[1];
-        vec[i][j].dead = true;
+    new_pos_vec.emplace_back(temp_pos_vec3);
+////    temp_pos_vec.clear();
+//
+    for (auto & i : catVec) {
+        i.move();
+        temp_pos_vec4.emplace_back(i.catNewPos);
     }
+    new_pos_vec.emplace_back(temp_pos_vec4);
+////    temp_pos_vec.clear();
 
-    dead_count = 0;
-    for (int i = 0; i < MAX_HEIGHT; i++) {
-        for (int j = 0; j < MAX_WIDTH; j++) {
-            if (vec[i][j].dead) dead_count++;
-        }
+    for (auto & i : snakeVec) {
+        i.move();
+        temp_pos_vec4.emplace_back(i.snakeNewPos);
     }
-    cout << "dead_count" << dead_count << endl;
-}
+    new_pos_vec.emplace_back(temp_pos_vec4);
 
 
-vector<char> stringSplit(string str, char del) {
-    // declaring temp string to store the curr "word" upto del
-    string temp = "";
-    vector<string> vec;
 
-    for (char i : str) {
-        // If cur char is not del, then append it to the cur "word", otherwise
-        // you have completed the word, print it, and start a new word.
-        if (i != del) {
-            temp += i;
-        } else {
-//            cout << temp << " ";
-            vec.push_back(temp);
-            temp = "";
-        }
-    }
-
-//    cout << temp;
-}
-
-
-//    int i = 0;
-//    while (i < 100) {
-//        int j = 0;
-//        while (j < 100) {
-//            cout << i << " ";
-//            j++;
+////     print the vector
+//    cout << "Printing the positions vector: " << endl;
+//    for (int i = 0; i < 100; i++) {
+//        for (int j = 0; j < 100; j++) {
+//            cout << "(" << new_pos_vec[i][j][0] << "," << new_pos_vec[i][j][1] << ") ";
+////            cout << vec[i][j].tigerInitialPos[0] << " ";
 //        }
-//        cout << endl;
-//        i++;
+//        cout << "\n";
 //    }
 //
-//    system("clear");
-
-//    vector<int> generatedPosition = generateRandomPosition();
+//    vector<vector<Tiger>> vec2 = vec;
+//    vector<string> string_vec;
+//    vector<vector<int>> pos_vec;
 //
-//    int acc = 0;
-//    while (acc < 2) {
-//        cout << generatedPosition[acc] << " ";
-//        acc++;
+//    //Cycling through the vec the first time.
+//    for (int i = 0; i < MAX_HEIGHT; i++) {
+//        for (int j = 0; j < MAX_WIDTH; j++) {
+//            // Cycling through the vec the second time
+//            for (int x = 0; x < MAX_HEIGHT; x++) {
+//                for (int y = 0; y < MAX_WIDTH; y++) {
+//                    if (i == x && j == y) { continue; }
+//                    if (vec[i][j].tigerInitialPos == vec[x][y].tigerInitialPos) {
+//                        printf("match [%d][%d] =  [%d][%d]", i, j, x, y);
+//                        vector<int> v1;
+//                        v1.push_back(i);
+//                        v1.push_back(j);
+//                        pos_vec.push_back(v1);
+////                        string_vec.push_back(to_string(i) + "_" + to_string(j));
+////                        string_vec.push_back(to_string(i) + "_" + to_string(j));
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    int dead_count = 0;
+//    for (int i = 0; i < MAX_HEIGHT; i++) {
+//        for (int j = 0; j < MAX_WIDTH; j++) {
+//            if (vec[i][j].dead) dead_count++;
+//        }
+//    }
+//
+//    cout << endl << "dead_count" << dead_count << endl;
+//
+//    // make them dead
+//    for (auto it : pos_vec) {
+//        int i = it[0];
+//        int j = it[1];
+//        vec[i][j].dead = true;
+//    }
+//
+//    dead_count = 0;
+//    for (int i = 0; i < MAX_HEIGHT; i++) {
+//        for (int j = 0; j < MAX_WIDTH; j++) {
+//            if (vec[i][j].dead) dead_count++;
+//        }
+//    }
+//    cout << "dead_count" << dead_count << endl;
+return 0;
+}
+
+
+//    for (int i = 0; i < tigerVec.size(); i++) {
+//        tigerVec[i].move();
+//        temp_pos_vec1.push_back(tigerVec[i].tigerNewPos);
+//    }
+//    new_pos_vec.push_back(temp_pos_vec1);
+//    temp_pos_vec.clear();
+//
+//    for (int i = 0; i < deerVec.size(); i++) {
+//        deerVec[i].move();
+//        temp_pos_vec2.push_back(deerVec[i].deerNewPos);
+//    }
+//    new_pos_vec.push_back(temp_pos_vec2);
+////    temp_pos_vec.clear();
+//
+//    for (int i = 0; i < monkeyVec.size(); i++) {
+//        monkeyVec[i].move();
+//        temp_pos_vec3.push_back(monkeyVec[i].monkeyNewPos);
+//    }
+//    new_pos_vec.push_back(temp_pos_vec3);
+////    temp_pos_vec.clear();
+//
+//    for (int i = 0; i < catVec.size(); i++) {
+//        catVec[i].move();
+//        temp_pos_vec4.push_back(catVec[i].catNewPos);
+//    }
+//    new_pos_vec.push_back(temp_pos_vec4);
+////    temp_pos_vec.clear();
+//
+//    for (int i = 0; i < snakeVec.size(); i++) {
+//        deerVec[i].move();
+//        temp_pos_vec5.push_back(snakeVec[i].snakeNewPos);
+//    }
+//    new_pos_vec.push_back(temp_pos_vec5);
+////    temp_pos_vec.clear();
+
+//     print the vector
+//    cout << "Printing the positions vector: " << endl;
+//    for (int i = 0; i < 100; i++) {
+//        for (int j = 0; j < 100; j++) {
+//            cout << "(" << new_pos_vec[i][j][0] << "," << new_pos_vec[i][j][1] << ") ";
+////            cout << vec[i][j].tigerInitialPos[0] << " ";
+//        }
+//        cout << "\n";
 //    }
 
-//    int arr[4] = {10, -10, 12, -12};
-//    int acc = 0;
-//    srand(time(nullptr));
-//    while (acc < 100) {
-//        cout << generateRandomNumber(arr) << endl;
-//        sleep(1);
-//        acc++;
+
+//
+//
+//vector<char> stringSplit(string str, char del) {
+//    // declaring temp string to store the curr "word" upto del
+//    string temp = "";
+//    vector<string> vec;
+//
+//    for (char i : str) {
+//        // If cur char is not del, then append it to the cur "word", otherwise
+//        // you have completed the word, print it, and start a new word.
+//        if (i != del) {
+//            temp += i;
+//        } else {
+////            cout << temp << " ";
+//            vec.push_back(temp);
+//            temp = "";
+//        }
 //    }
-
-
-//    board(10, 12);
-
-//    cout << determineNextAfterRandomDirection(UP, CLOCK_WISE) << endl;
-//    cout << determineNextAfterRandomDirection(RIGHT, CLOCK_WISE) << endl;
-//    cout << determineNextAfterRandomDirection(DOWN, CLOCK_WISE) << endl;
-//    cout << determineNextAfterRandomDirection(LEFT, CLOCK_WISE) << endl;
-
-//    moveTiger();
-//    moveTiger();
-//    moveTiger();
-
-
 //
-//cout << endl << string_vec.size() << endl;
-//// deleting duplicate from string
-//set<string> const uniques(string_vec.begin(), string_vec.end());
-//string_vec.assign(uniques.begin(), uniques.end());
-//
-//// print non duplicate string_vec
-//for (auto i: string_vec) std::cout << i << ' ';
-//
-//cout << endl << string_vec.size() << endl;
+////    cout << temp;
+//}
 //
 //
-////    for (string str: string_vec) {
-////        string st = str;
-////        vector<char> str_parsed = stringSplit(st, "_");
-////        int i = str[0] - 48;
+////    int i = 0;
+////    while (i < 100) {
+////        int j = 0;
+////        while (j < 100) {
+////            cout << i << " ";
+////            j++;
+////        }
+////        cout << endl;
+////        i++;
+////    }
 ////
+////    system("clear");
+//
+////    vector<int> generatedPosition = generateRandomPosition();
 ////
-////        std::cout << i << endl;
+////    int acc = 0;
+////    while (acc < 2) {
+////        cout << generatedPosition[acc] << " ";
+////        acc++;
 ////    }
 //
-////    for (int acc = 0; acc < string_vec.size(); acc++) {
-////        string str = string_vec[acc];
-////        char del = '_';
-////        vector<char> str_parsed = stringSplit(str, del);
-////        char char_i = str_parsed[0];
-////        int i = ;
-//////        int j = str_parsed[1] - 48;
-////
-////        std::cout << i << " " <<"" << endl;
+////    int arr[4] = {10, -10, 12, -12};
+////    int acc = 0;
+////    srand(time(nullptr));
+////    while (acc < 100) {
+////        cout << generateRandomNumber(arr) << endl;
+////        sleep(1);
+////        acc++;
 ////    }
+//
+//
+////    board(10, 12);
+//
+////    cout << determineNextAfterRandomDirection(UP, CLOCK_WISE) << endl;
+////    cout << determineNextAfterRandomDirection(RIGHT, CLOCK_WISE) << endl;
+////    cout << determineNextAfterRandomDirection(DOWN, CLOCK_WISE) << endl;
+////    cout << determineNextAfterRandomDirection(LEFT, CLOCK_WISE) << endl;
+//
+////    moveTiger();
+////    moveTiger();
+////    moveTiger();
+//
+//
 ////
-////cout << atoi("12");
-//
-//
-//// declaring temp string to store the curr "word" upto del
-//// declaring temp string to store the curr "word" upto del
-//auto temp = "";
-//string del = "_";
-//
-//for(auto i=0; i<(int)string_vec[0].size(); i++){
-//// If cur char is not del, then append it to the cur "word", otherwise
-//// you have completed the word, print it, and start a new word.
-//if(string_vec[0][i] != del){
-//temp += string_vec[0][i];
-//}
-//else{
-//cout << temp << " " << endl;
-//temp = "";
-//}
-//}
-//
-//cout << temp;
+////cout << endl << string_vec.size() << endl;
+////// deleting duplicate from string
+////set<string> const uniques(string_vec.begin(), string_vec.end());
+////string_vec.assign(uniques.begin(), uniques.end());
+////
+////// print non duplicate string_vec
+////for (auto i: string_vec) std::cout << i << ' ';
+////
+////cout << endl << string_vec.size() << endl;
+////
+////
+//////    for (string str: string_vec) {
+//////        string st = str;
+//////        vector<char> str_parsed = stringSplit(st, "_");
+//////        int i = str[0] - 48;
+//////
+//////
+//////        std::cout << i << endl;
+//////    }
+////
+//////    for (int acc = 0; acc < string_vec.size(); acc++) {
+//////        string str = string_vec[acc];
+//////        char del = '_';
+//////        vector<char> str_parsed = stringSplit(str, del);
+//////        char char_i = str_parsed[0];
+//////        int i = ;
+////////        int j = str_parsed[1] - 48;
+//////
+//////        std::cout << i << " " <<"" << endl;
+//////    }
+//////
+//////cout << atoi("12");
+////
+////
+////// declaring temp string to store the curr "word" upto del
+////// declaring temp string to store the curr "word" upto del
+////auto temp = "";
+////string del = "_";
+////
+////for(auto i=0; i<(int)string_vec[0].size(); i++){
+////// If cur char is not del, then append it to the cur "word", otherwise
+////// you have completed the word, print it, and start a new word.
+////if(string_vec[0][i] != del){
+////temp += string_vec[0][i];
+////}
+////else{
+////cout << temp << " " << endl;
+////temp = "";
+////}
+////}
+////
+////cout << temp;
