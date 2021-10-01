@@ -130,6 +130,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named Travel_agency_project
+
+# Build rule for target.
+Travel_agency_project: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Travel_agency_project
+.PHONY : Travel_agency_project
+
+# fast build rule for target.
+Travel_agency_project/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Travel_agency_project.dir/build.make CMakeFiles/Travel_agency_project.dir/build
+.PHONY : Travel_agency_project/fast
+
+#=============================================================================
 # Target rules for targets named test
 
 # Build rule for target.
@@ -143,17 +156,17 @@ test/fast:
 .PHONY : test/fast
 
 #=============================================================================
-# Target rules for targets named Travel_agency_project
+# Target rules for targets named test02
 
 # Build rule for target.
-Travel_agency_project: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Travel_agency_project
-.PHONY : Travel_agency_project
+test02: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test02
+.PHONY : test02
 
 # fast build rule for target.
-Travel_agency_project/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Travel_agency_project.dir/build.make CMakeFiles/Travel_agency_project.dir/build
-.PHONY : Travel_agency_project/fast
+test02/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test02.dir/build.make CMakeFiles/test02.dir/build
+.PHONY : test02/fast
 
 generateID.o: generateID.cpp.o
 
@@ -236,6 +249,33 @@ test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
 .PHONY : test.cpp.s
 
+test02.o: test02.cpp.o
+
+.PHONY : test02.o
+
+# target to build an object file
+test02.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test02.dir/build.make CMakeFiles/test02.dir/test02.cpp.o
+.PHONY : test02.cpp.o
+
+test02.i: test02.cpp.i
+
+.PHONY : test02.i
+
+# target to preprocess a source file
+test02.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test02.dir/build.make CMakeFiles/test02.dir/test02.cpp.i
+.PHONY : test02.cpp.i
+
+test02.s: test02.cpp.s
+
+.PHONY : test02.s
+
+# target to generate assembly for a file
+test02.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test02.dir/build.make CMakeFiles/test02.dir/test02.cpp.s
+.PHONY : test02.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -246,6 +286,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Travel_agency_project"
 	@echo "... test"
+	@echo "... test02"
 	@echo "... generateID.o"
 	@echo "... generateID.i"
 	@echo "... generateID.s"
@@ -255,6 +296,9 @@ help:
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
+	@echo "... test02.o"
+	@echo "... test02.i"
+	@echo "... test02.s"
 .PHONY : help
 
 
