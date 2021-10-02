@@ -5,6 +5,7 @@
 #include "iostream"
 #include "ctime"
 #include "string"
+#include <sstream>
 #include "vector"
 
 using namespace std;
@@ -23,16 +24,17 @@ string generateId(const string &name) {
 class TravelTrip {
 public:
     string invoice_id;
-    basic_string<char> creation_date;
+    string creation_date;
     string user_name;
     string user_address;
     string phone_no;
     string trip_start_location;
     string trip_end_location;
 
-    TravelTrip(string name, string addr, string phone, string startLoc, string endLoc) {
-        time_t now = time(0);
-        creation_date = to_string(now);
+    TravelTrip(string name, string addr, string phone, string date, string startLoc, string endLoc) {
+        time_t now = time(nullptr);
+//        creation_date = to_string(now);
+        creation_date = date;
         invoice_id = generateId(user_name);
         user_name = name;
         user_address = addr;
@@ -42,42 +44,38 @@ public:
     }
 };
 
+vector<TravelTrip> trips;
+
 class NewTravelTrip {
 private:
-    string name, addr, phone, startLoc, endLoc;
+    string name, addr, phone, date, startLoc, endLoc;
 public:
-    vector<TravelTrip> trips;
 
-    void addTrip() {
-        cout << "Enter user_name: ";
-        getline(cin, name);
-        cout << "Enter user_address: ";
-        getline(cin, addr);
-        cout << "Enter phone_no: ";
-        getline(cin, phone);
-        cout << "Enter trip_start_location: ";
-        getline(cin, startLoc);
-        cout << "Enter trip_end_location: ";
-        getline(cin, endLoc);
-
-        TravelTrip newTrip = TravelTrip(name, addr, phone, startLoc, endLoc);
-        trips.push_back(newTrip);
-    }
+    void newTravelTrip();
 
     void searchBy() {
 
     }
 
     // returns index of matched TravelTrip object
-    int search() {
-        int search_no;
+    static int search() {
+        cout << " \n <----------- Please search before you edit or delete ------------> \n";
+        char op;
         string search_name, search_id;
-        cout << "Enter -> 1: Search by name, 2: invoice_id, 3: cancel -----> ";
-        cin >> search_no;
 
-        if (search_no == 1) {
+        SearchMenu:
+        cout << "1: Search by name \n";
+        cout << "2: Search by invoice_id \n";
+        cout << "3: Cancel Search \n";
+        cout << "Enter your option: ";
+        cin >> op;
+
+        int option = op - '0';
+
+        if (option == 1) {
             cout << "Enter search_name: ";
-            cin >> search_name;
+            cin.ignore(1, '\n');
+            getline(cin, search_name);
 
             int i = 0;
             while (i < trips.size()) {
@@ -86,53 +84,35 @@ public:
                 }
                 i++;
             }
+        } else if (option == 2) {
+            cout << "Enter search_invoice_id: ";
+            cin.ignore(1, '\n');
+            getline(cin, search_id);
+
+            int i = 0;
+            while (i < trips.size()) {
+                if (trips[i].invoice_id == search_id) {
+                    return i;
+                }
+                i++;
+            }
+        } else {
+            cout << " \n <----------- Error: Invalid Input Choice------------> \n \n";;
+            goto SearchMenu;
         }
 
         // if not found return -1
         return -1;
     }
 
-    void editTrip() {
-        int index = search();
-        if (index >= 0) {
-            cin.ignore(1, '\n');
-            cout << "Enter User Name (X to not change): ";
-            getline(cin, name);
-            if (name != "X") {
-                trips[index].user_name = name;
-            }
-
-            cout << "Enter User Address (X to not change): ";
-            getline(cin, addr);
-            if (addr != "X") {
-                trips[index].user_address = addr;
-            }
-
-            cout << "Enter User Phone No. (X to not change): ";
-            getline(cin, phone);
-            if (phone != "X") {
-                trips[index].phone_no = phone;
-            }
-
-            cout << "Enter Trip Start Location (X to not change): ";
-            getline(cin, startLoc);
-            if (startLoc != "X") {
-                trips[index].trip_start_location = startLoc;
-            }
-
-            cout << "Enter Trip End Location (X to not change): ";
-            getline(cin, endLoc);
-            if (endLoc != "X") {
-                trips[index].trip_end_location = endLoc;
-            }
-        } else {
-            cout << "user not found" << endl;
-        }
-    }
 
     void deleteTrip() {
         int index = search();
     }
+
+    void addTrip() {}
+
+    void editTrip();
 
 
     void printTrips() {
@@ -153,21 +133,202 @@ public:
             i++;
         }
     }
+
+
 };
 
+NewTravelTrip mNewTravelTrip = NewTravelTrip();
+
+void menu(NewTravelTrip newTravelTrip = mNewTravelTrip, vector<TravelTrip> trips_vec = trips);
+
+
+void NewTravelTrip::newTravelTrip() {
+    cout << " \n <----------- Creating new travel trip ------------> \n";
+    cin.ignore(1, '\n');
+    cout << "Enter user_name: ";
+    getline(cin, name);
+    cout << "Enter user_address: ";
+    getline(cin, addr);
+    cout << "Enter phone_no: ";
+    getline(cin, phone);
+    cout << "Enter trip date: ";
+    getline(cin, date);
+    cout << "Enter trip_start_location: ";
+    getline(cin, startLoc);
+    cout << "Enter trip_end_location: ";
+    getline(cin, endLoc);
+
+    TravelTrip newTrip = TravelTrip(name, addr, phone, date, startLoc, endLoc);
+    trips.push_back(newTrip);
+
+    cout << " \n <----------- New travel trip saved successfully ------------> \n";
+    cout << " <----------- Going back to main menu ------------> \n \n";
+    menu();
+}
+
+void NewTravelTrip::editTrip() {
+    int index = search();
+    if (index >= 0) {
+        cout << "\n <----------- Editing Trip of invoice_id: " << trips[index].invoice_id << " ------------> \n";
+        cin.ignore(1, '\n');
+//        cout << "Enter User Name (X to not change): ";
+//        getline(cin, name);
+//        if (name != "X" || name != "x" || name != "\n") {
+//            trips[index].user_name = name;
+//        }
+//
+//        cout << "Enter User Address (X to not change): ";
+//        getline(cin, addr);
+//        if (addr != "X" || name != "x" || name != "\n") {
+//            trips[index].user_address = addr;
+//        }
+//
+//        cout << "Enter User Phone No. (X to not change): ";
+//        getline(cin, phone);
+//        if (phone != "X") {
+//            trips[index].phone_no = phone;
+//        }
+
+        cout << "Enter Trip Date  (X to not change): ";
+        getline(cin, startLoc);
+        if (startLoc != "X") {
+            trips[index].trip_start_location = startLoc;
+        }
+
+        cout << "Enter Trip Start Location (X to not change): ";
+        getline(cin, startLoc);
+        if (startLoc != "X") {
+            trips[index].trip_start_location = startLoc;
+        }
+
+        cout << "Enter Trip End Location (X to not change): ";
+        getline(cin, endLoc);
+        if (endLoc != "X") {
+            trips[index].trip_end_location = endLoc;
+        }
+    } else {
+        cout << "\n <----------- Trip of invoice_id: " << trips[index].invoice_id
+             << " not found. Please enter valid input ------------> \n";
+    }
+}
+
+class ShowAllUsers {
+public:
+    static void showAllUsers(NewTravelTrip newTravelTrip, vector<TravelTrip> &trips) {
+
+        if (trips.size() == 0) {
+            cout << "\n <----------- No users found ------------> \n";
+            cout << " <----------- Going back to main menu ------------> \n \n";
+            menu(newTravelTrip, trips);
+        } else {
+            cout << " \n <----------- Viewing all users ------------> \n";
+            for (int i = 0; i < trips.size(); i++) {
+                cout << i + 1 << ". " << trips[i].user_name << endl;
+            }
+            cout << " \n <----------- Going back to main menu ------------> \n \n";
+            menu(newTravelTrip, trips);
+        }
+
+
+    }
+
+    static void editUser(vector<TravelTrip> &trips) {
+        int index = NewTravelTrip::search();
+        string name, addr, phone;
+        if (index >= 0) {
+            cout << "\n <----------- Editing user: " << trips[index].user_name << " ------------> \n";
+            cin.ignore(1, '\n');
+            cout << "Enter User Name (X to not change): ";
+            getline(cin, name);
+            if (name != "X") {
+                trips[index].user_name = name;
+            }
+            cout << "Enter User Address (X to not change): ";
+            getline(cin, addr);
+            if (addr != "X") {
+                trips[index].user_address = addr;
+            }
+        } else {
+            cout << "\n <----------- No users found. Please enter a valid input ------------> \n";
+            cout << " <----------- Going back to main menu ------------> \n \n";
+            menu();
+        }
+    }
+
+    static void deleteUser(const vector<TravelTrip> &trips) {
+        NewTravelTrip::search();
+        for (const auto &it : trips) {
+            cout << it.user_name;
+        }
+    }
+};
+
+void menu(NewTravelTrip newTravelTrip, vector<TravelTrip> trips_vec) {
+    char op;
+
+    ExitMenu:
+    cout << " <----------- Main menu ------------> \n \n";
+    cout << "1. New Travel Trip\n";
+    cout << "2. Show All Users\n";
+    cout << "3. Edit User\n";
+    cout << "4. Delete User\n";
+    cout << "5. Add Trip\n";
+    cout << "6. Edit Trip\n";
+    cout << "7. Delete Trip\n";
+    cout << "Enter your option: ";
+
+    cin >> op;
+    int option = op - '0';
+
+    if (option == 1) {
+        newTravelTrip.newTravelTrip();
+
+    } else if (option == 2)
+        ShowAllUsers::showAllUsers(newTravelTrip, trips_vec);
+
+    else if (option == 3)
+        ShowAllUsers::editUser(trips_vec);
+
+    else if (option == 4)
+        ShowAllUsers::deleteUser(trips_vec);
+
+    else if (option == 5)
+        newTravelTrip.addTrip();
+
+    else if (option == 6)
+        newTravelTrip.editTrip();
+
+    else if (option == 7)
+        newTravelTrip.deleteTrip();
+
+    else {
+        cout << " \n <----------- Error: Invalid Input Choice ------------> \n \n";;
+        goto ExitMenu;
+    }
+//            break;
+}
+
+//    cout<< "Press 0 to enter menu again: ";
+//    cin >> option;
+//    if(option == 0) {
+//        return menu(newTravelTrip, trips);
+//    }
+
+
 int main() {
-    NewTravelTrip newTravelTrip = NewTravelTrip();
-    newTravelTrip.addTrip();
-    cout << "Size of trips vector: " + to_string(newTravelTrip.trips.size()) << endl;
-    newTravelTrip.addTrip();
-    cout << "Size of trips vector: " + to_string(newTravelTrip.trips.size()) << endl;
 
-    newTravelTrip.printTrips();
-
-//    newTravelTrip.editTrip();
-
-//    vec.erase(vec.begin() + index);
-    newTravelTrip.trips.erase(newTravelTrip.trips.begin() + 0);
-    newTravelTrip.printTrips();
+//    newTravelTrip.newTravelTrip();
+//    cout << "Size of trips vector: " + to_string(newTravelTrip.trips.size()) << endl;
+//    newTravelTrip.addTrip();
+//    cout << "Size of trips vector: " + to_string(newTravelTrip.trips.size()) << endl;
+//
+//    newTravelTrip.printTrips();
+//
+////    newTravelTrip.editTrip();
+//
+////    vec.erase(vec.begin() + index);
+//    newTravelTrip.trips.erase(newTravelTrip.trips.begin() + 0);
+//    newTravelTrip.printTrips();
+    menu(mNewTravelTrip, trips);
 
 }

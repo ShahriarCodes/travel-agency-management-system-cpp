@@ -75,17 +75,6 @@ CMAKE_BINARY_DIR = /home/sal/CLionProjects/Travel_agency_project/cmake-build-deb
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/sal/CLion-2021.1/clion-2021.1/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -96,6 +85,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/home/sal/CLion-2021.1/clion-2021.1/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -141,6 +141,32 @@ Travel_agency_project: cmake_check_build_system
 Travel_agency_project/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Travel_agency_project.dir/build.make CMakeFiles/Travel_agency_project.dir/build
 .PHONY : Travel_agency_project/fast
+
+#=============================================================================
+# Target rules for targets named test03
+
+# Build rule for target.
+test03: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test03
+.PHONY : test03
+
+# fast build rule for target.
+test03/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test03.dir/build.make CMakeFiles/test03.dir/build
+.PHONY : test03/fast
+
+#=============================================================================
+# Target rules for targets named sun
+
+# Build rule for target.
+sun: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sun
+.PHONY : sun
+
+# fast build rule for target.
+sun/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sun.dir/build.make CMakeFiles/sun.dir/build
+.PHONY : sun/fast
 
 #=============================================================================
 # Target rules for targets named test
@@ -222,6 +248,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Travel_agency_project.dir/build.make CMakeFiles/Travel_agency_project.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+sun.o: sun.cpp.o
+
+.PHONY : sun.o
+
+# target to build an object file
+sun.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sun.dir/build.make CMakeFiles/sun.dir/sun.cpp.o
+.PHONY : sun.cpp.o
+
+sun.i: sun.cpp.i
+
+.PHONY : sun.i
+
+# target to preprocess a source file
+sun.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sun.dir/build.make CMakeFiles/sun.dir/sun.cpp.i
+.PHONY : sun.cpp.i
+
+sun.s: sun.cpp.s
+
+.PHONY : sun.s
+
+# target to generate assembly for a file
+sun.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sun.dir/build.make CMakeFiles/sun.dir/sun.cpp.s
+.PHONY : sun.cpp.s
+
 test.o: test.cpp.o
 
 .PHONY : test.o
@@ -276,6 +329,33 @@ test02.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test02.dir/build.make CMakeFiles/test02.dir/test02.cpp.s
 .PHONY : test02.cpp.s
 
+test03.o: test03.cpp.o
+
+.PHONY : test03.o
+
+# target to build an object file
+test03.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test03.dir/build.make CMakeFiles/test03.dir/test03.cpp.o
+.PHONY : test03.cpp.o
+
+test03.i: test03.cpp.i
+
+.PHONY : test03.i
+
+# target to preprocess a source file
+test03.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test03.dir/build.make CMakeFiles/test03.dir/test03.cpp.i
+.PHONY : test03.cpp.i
+
+test03.s: test03.cpp.s
+
+.PHONY : test03.s
+
+# target to generate assembly for a file
+test03.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test03.dir/build.make CMakeFiles/test03.dir/test03.cpp.s
+.PHONY : test03.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -285,20 +365,28 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Travel_agency_project"
+	@echo "... sun"
 	@echo "... test"
 	@echo "... test02"
+	@echo "... test03"
 	@echo "... generateID.o"
 	@echo "... generateID.i"
 	@echo "... generateID.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... sun.o"
+	@echo "... sun.i"
+	@echo "... sun.s"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
 	@echo "... test02.o"
 	@echo "... test02.i"
 	@echo "... test02.s"
+	@echo "... test03.o"
+	@echo "... test03.i"
+	@echo "... test03.s"
 .PHONY : help
 
 

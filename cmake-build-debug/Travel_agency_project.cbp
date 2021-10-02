@@ -17,6 +17,16 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="Travel_agency_project">
 				<Option output="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Travel_agency_project" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug"/>
@@ -56,6 +66,94 @@
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 Travel_agency_project/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test03">
+				<Option output="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/test03" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 test03"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test03/fast">
+				<Option output="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/test03" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 test03/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sun">
+				<Option output="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/sun" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 sun"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sun/fast">
+				<Option output="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/sun" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 sun/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -159,16 +257,6 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/sal/CLionProjects/Travel_agency_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 		</Build>
 		<Unit filename="/home/sal/CLionProjects/Travel_agency_project/generateID.cpp">
 			<Option target="test"/>
@@ -176,11 +264,17 @@
 		<Unit filename="/home/sal/CLionProjects/Travel_agency_project/main.cpp">
 			<Option target="Travel_agency_project"/>
 		</Unit>
+		<Unit filename="/home/sal/CLionProjects/Travel_agency_project/sun.cpp">
+			<Option target="sun"/>
+		</Unit>
 		<Unit filename="/home/sal/CLionProjects/Travel_agency_project/test.cpp">
 			<Option target="test"/>
 		</Unit>
 		<Unit filename="/home/sal/CLionProjects/Travel_agency_project/test02.cpp">
 			<Option target="test02"/>
+		</Unit>
+		<Unit filename="/home/sal/CLionProjects/Travel_agency_project/test03.cpp">
+			<Option target="test03"/>
 		</Unit>
 		<Unit filename="/home/sal/CLionProjects/Travel_agency_project/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

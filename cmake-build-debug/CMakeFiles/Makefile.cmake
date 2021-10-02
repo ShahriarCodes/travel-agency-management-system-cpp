@@ -47,6 +47,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Travel_agency_project.dir/DependInfo.cmake"
+  "CMakeFiles/test03.dir/DependInfo.cmake"
+  "CMakeFiles/sun.dir/DependInfo.cmake"
   "CMakeFiles/test.dir/DependInfo.cmake"
   "CMakeFiles/test02.dir/DependInfo.cmake"
   )
