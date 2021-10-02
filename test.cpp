@@ -1,5 +1,5 @@
 ﻿//
-// Created by sal on 29.09.21.
+// Created by hasan on 29.09.21.
 //
 
 #include "iostream"
@@ -7,14 +7,17 @@
 #include "string"
 #include <sstream>
 #include "vector"
+#include <fstream>
+
 
 using namespace std;
 
+void updateTextFile();
 
 string generateId(const string &name) {
     time_t now = time(nullptr); // current time in seconds after 1970, 1st January
     srand(now); // initialize random seed
-    int salt = rand() % 10000 + 1; // generate random salt between 1 to 10000
+    int salt = rand() % 10000 + 1; // generate random num between 1 to 10000
 
     string id = name + "_" + to_string(now) + "_" + to_string(salt);
 
@@ -28,35 +31,32 @@ public:
     string user_name;
     string user_address;
     string phone_no;
+    string email_address;
     string trip_start_location;
     string trip_end_location;
 
-    TravelTrip(string name, string addr, string phone, string date, string startLoc, string endLoc) {
-        time_t now = time(nullptr);
-//        creation_date = to_string(now);
+    TravelTrip(string name, string addr, string phone, string email, string date, string startLoc, string endLoc) {
         creation_date = date;
         invoice_id = generateId(user_name);
         user_name = name;
         user_address = addr;
         phone_no = phone;
+        email_address = email;
         trip_start_location = startLoc;
         trip_end_location = endLoc;
     }
 };
 
 vector<TravelTrip> trips;
+vector<TravelTrip> added_trips;
 
 class NewTravelTrip {
 private:
-    string name, addr, phone, date, startLoc, endLoc;
-    vector<TravelTrip> added_trips;
+    string id, name, addr, phone, email, date, startLoc, endLoc;
+
 public:
 
     void newTravelTrip();
-
-    void searchBy() {
-
-    }
 
     // returns index of matched TravelTrip object
     static int search() {
@@ -97,6 +97,8 @@ public:
                 }
                 i++;
             }
+        } else if (option == 3) {
+            return -1;
         } else {
             cout << " \n <----------- Error: Invalid Input Choice------------> \n \n";;
             goto SearchMenu;
@@ -125,6 +127,7 @@ public:
             cout << "user_name: " << trips[i].user_name << endl;
             cout << "user_address: " << trips[i].user_address << endl;
             cout << "phone_no: " << trips[i].phone_no << endl;
+            cout << "email_address: " << trips[i].email_address << endl;
             cout << "trip_start_location: " << trips[i].trip_start_location << endl;
             cout << "trip_end_location: " << trips[i].trip_end_location << endl;
 
@@ -150,6 +153,8 @@ void NewTravelTrip::newTravelTrip() {
     getline(cin, addr);
     cout << "Enter phone_no: ";
     getline(cin, phone);
+    cout << "Enter email_address: ";
+    getline(cin, email);
     cout << "Enter trip date: ";
     getline(cin, date);
     cout << "Enter trip_start_location: ";
@@ -157,7 +162,7 @@ void NewTravelTrip::newTravelTrip() {
     cout << "Enter trip_end_location: ";
     getline(cin, endLoc);
 
-    TravelTrip newTrip = TravelTrip(name, addr, phone, date, startLoc, endLoc);
+    TravelTrip newTrip = TravelTrip(name, addr, phone, email, date, startLoc, endLoc);
     trips.push_back(newTrip);
 
     cout << " \n <----------- New travel trip saved successfully ------------> \n";
@@ -245,25 +250,24 @@ public:
         } else {
             cout << " \n <----------- Viewing all users ------------> \n";
             for (int i = 0; i < trips.size(); i++) {
-                cout << i + 1 << ". " << trips[i].user_name
+                cout << i + 1
                      << " ,  invoice_id: " << trips[i].invoice_id
                      << " ,  creation_date: " << trips[i].creation_date
                      << " ,  user_name: " << trips[i].user_name
                      << " ,  user_address: " << trips[i].user_address
                      << " ,  phone_no: " << trips[i].phone_no
+                     << " ,  email_address: " << trips[i].email_address
                      << " ,  trip_start_location: " << trips[i].trip_start_location
                      << " ,  trip_end_location: " << trips[i].trip_end_location << endl;
             }
             cout << " \n <----------- Going back to main menu ------------> \n \n";
             menu(newTravelTrip, trips);
         }
-
-
     }
 
     static void editUser(vector<TravelTrip> &trips) {
         int index = NewTravelTrip::search();
-        string name, addr, phone;
+        string name, addr, phone, email;
         if (index >= 0) {
             cout << "\n <----------- Editing user: " << trips[index].user_name << " ------------> \n";
             cin.ignore(1, '\n');
@@ -280,9 +284,16 @@ public:
 
             cout << "Enter Phone Number (X to not change): ";
             getline(cin, phone);
-            if (addr != "X") {
-                trips[index].user_address = addr;
+            if (phone != "X") {
+                trips[index].phone_no = phone;
             }
+
+            cout << "Enter Email Address (X to not change): ";
+            getline(cin, email);
+            if (email != "X") {
+                trips[index].email_address = email;
+            }
+
             cout << "\n <----------- User of username: " << trips[index].user_name
                  << " edited successfully ------------> \n";
             cout << " <----------- Going back to main menu ------------> \n \n";
@@ -324,6 +335,7 @@ void menu(NewTravelTrip newTravelTrip, vector<TravelTrip> trips_vec) {
     cout << "\t5. Add Trip\n";
     cout << "\t6. Edit Trip\n";
     cout << "\t7. Delete Trip\n";
+    cout << "\t8. Exit\n";
     cout << "\t\n Enter your choice: ";
 
     cin >> op;
@@ -349,16 +361,71 @@ void menu(NewTravelTrip newTravelTrip, vector<TravelTrip> trips_vec) {
 
     else if (option == 7)
         newTravelTrip.deleteTrip();
-
-    else {
+    else if (option == 8) {
+        updateTextFile();
+        exit(0);
+    } else {
         cout << " \n <----------- Error: Invalid Input Choice ------------> \n \n";;
         goto ExitMenu;
     }
 //            break;
 }
 
+void loadFromTextFile() {
+    string travelText;
+    string id, name, addr, phone, email, date, startLoc, endLoc;
+    ifstream MyReadFile("/home/sal/CLionProjects/Travel_agency_project/travel01.txt");
+    while (getline(MyReadFile, travelText)) {
+        stringstream ss(travelText);
+        string info;
+        int index = 1;
+        while (ss >> info) {
+            if (index == 1) {
+                id = info;
+            } else if (index == 2) {
+                name = info;
+            } else if (index == 3) {
+                addr = info;
+            } else if (index == 4) {
+                phone = info;
+            } else if (index == 5) {
+                email = info;
+            } else if (index == 6) {
+                date = info;
+            } else if (index == 7) {
+                startLoc = info;
+            } else if (index == 8) {
+                endLoc = info;
+            }
+            index++;
+
+        }
+        TravelTrip travelTrip = TravelTrip(name, addr, phone, email, date, startLoc, endLoc);
+        travelTrip.invoice_id = id;
+        trips.push_back(travelTrip);
+    }
+    MyReadFile.close();
+}
+
+//
+void updateTextFile() {
+    ofstream MyFile("/home/sal/CLionProjects/Travel_agency_project/travel.txt");
+    for (int i = 0; i < added_trips.size(); i++) {
+        MyFile << added_trips[i].invoice_id
+               << " " << added_trips[i].user_name
+               << " " << added_trips[i].user_address
+               << " " << added_trips[i].phone_no
+               << " " << added_trips[i].email_address
+               << " " << added_trips[i].creation_date
+               << " " << added_trips[i].trip_start_location
+               << " " << added_trips[i].trip_end_location << endl;
+    }
+    MyFile.close();
+}
+
 
 int main() {
+    cout << "\e[1mWelcome to Travel Agency Management System\e[0m" << " \n";
+    loadFromTextFile();
     menu(mNewTravelTrip, trips);
-
 }
