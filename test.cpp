@@ -170,23 +170,6 @@ void NewTravelTrip::editTrip() {
     if (index >= 0) {
         cout << "\n <----------- Editing Trip of invoice_id: " << trips[index].invoice_id << " ------------> ";
         cin.ignore(1, '\n');
-//        cout << "Enter User Name (X to not change): ";
-//        getline(cin, name);
-//        if (name != "X" || name != "x" || name != "\n") {
-//            trips[index].user_name = name;
-//        }
-//
-//        cout << "Enter User Address (X to not change): ";
-//        getline(cin, addr);
-//        if (addr != "X" || name != "x" || name != "\n") {
-//            trips[index].user_address = addr;
-//        }
-//
-//        cout << "Enter User Phone No. (X to not change): ";
-//        getline(cin, phone);
-//        if (phone != "X") {
-//            trips[index].phone_no = phone;
-//        }
 
         cout << "Enter Trip Date  (X to not change): ";
         getline(cin, date);
@@ -374,27 +357,8 @@ void menu(NewTravelTrip newTravelTrip, vector<TravelTrip> trips_vec) {
 //            break;
 }
 
-//    cout<< "Press 0 to enter menu again: ";
-//    cin >> option;
-//    if(option == 0) {
-//        return menu(newTravelTrip, trips);
-//    }
-
 
 int main() {
-
-//    newTravelTrip.newTravelTrip();
-//    cout << "Size of trips vector: " + to_string(newTravelTrip.trips.size()) << endl;
-//    newTravelTrip.addTrip();
-//    cout << "Size of trips vector: " + to_string(newTravelTrip.trips.size()) << endl;
-//
-//    newTravelTrip.printTrips();
-//
-////    newTravelTrip.editTrip();
-//
-////    vec.erase(vec.begin() + index);
-//    newTravelTrip.trips.erase(newTravelTrip.trips.begin() + 0);
-//    newTravelTrip.printTrips();
     menu(mNewTravelTrip, trips);
 
 }
