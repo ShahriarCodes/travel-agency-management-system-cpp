@@ -49,6 +49,7 @@ vector<TravelTrip> trips;
 class NewTravelTrip {
 private:
     string name, addr, phone, date, startLoc, endLoc;
+    vector<TravelTrip> added_trips;
 public:
 
     void newTravelTrip();
@@ -67,7 +68,7 @@ public:
         cout << "1: Search by name \n";
         cout << "2: Search by invoice_id \n";
         cout << "3: Cancel Search \n";
-        cout << "Enter your option: ";
+        cout << "Enter your choice: ";
         cin >> op;
 
         int option = op - '0';
@@ -106,11 +107,9 @@ public:
     }
 
 
-    void deleteTrip() {
-        int index = search();
-    }
+    void deleteTrip();
 
-    void addTrip() {}
+    void addTrip();
 
     void editTrip();
 
@@ -169,7 +168,7 @@ void NewTravelTrip::newTravelTrip() {
 void NewTravelTrip::editTrip() {
     int index = search();
     if (index >= 0) {
-        cout << "\n <----------- Editing Trip of invoice_id: " << trips[index].invoice_id << " ------------> \n";
+        cout << "\n <----------- Editing Trip of invoice_id: " << trips[index].invoice_id << " ------------> ";
         cin.ignore(1, '\n');
 //        cout << "Enter User Name (X to not change): ";
 //        getline(cin, name);
@@ -190,9 +189,9 @@ void NewTravelTrip::editTrip() {
 //        }
 
         cout << "Enter Trip Date  (X to not change): ";
-        getline(cin, startLoc);
-        if (startLoc != "X") {
-            trips[index].trip_start_location = startLoc;
+        getline(cin, date);
+        if (date != "X") {
+            trips[index].creation_date = date;
         }
 
         cout << "Enter Trip Start Location (X to not change): ";
@@ -206,9 +205,49 @@ void NewTravelTrip::editTrip() {
         if (endLoc != "X") {
             trips[index].trip_end_location = endLoc;
         }
+
+        cout << " \n <----------- trip of invoice_id: " << trips[index].invoice_id
+             << " edited successfully ------------> \n";
+        cout << " <----------- Going back to main menu ------------> \n \n";
+        menu();
     } else {
-        cout << "\n <----------- Trip of invoice_id: " << trips[index].invoice_id
-             << " not found. Please enter valid input ------------> \n";
+        cout << "\n <----------- Trip not found. Please enter valid input ------------> \n";
+        cout << " <----------- Going back to main menu ------------> \n \n";
+        menu();
+    }
+}
+
+void NewTravelTrip::deleteTrip() {
+    int index = search();
+    if (index >= 0) {
+        string deleted_id = trips[index].invoice_id;
+        trips.erase(trips.begin() + index);
+        cout << " \n <----------- trip of invoice_id: " << deleted_id
+             << " deleted successfully ------------> \n";
+        cout << " <----------- Going back to main menu ------------> \n \n";
+        menu();
+    } else {
+        cout << "\n <----------- Trip of invoice_id: not found. Please enter valid input ------------> \n";
+        cout << " <----------- Going back to main menu ------------> \n \n";
+        menu();
+    }
+}
+
+void NewTravelTrip::addTrip() {
+    int index = search();
+    if (index >= 0) {
+        string added_id = trips[index].invoice_id;
+        TravelTrip selected_trip = trips[index];
+
+        added_trips.push_back(selected_trip);
+        cout << " \n <----------- trip of invoice_id: " << added_id
+             << " added to trips successfully ------------> \n";
+        cout << " <----------- Going back to main menu ------------> \n \n";
+        menu();
+    } else {
+        cout << "\n <----------- Trip not found. Please enter valid input ------------> \n";
+        cout << " <----------- Going back to main menu ------------> \n \n";
+        menu();
     }
 }
 
@@ -223,7 +262,14 @@ public:
         } else {
             cout << " \n <----------- Viewing all users ------------> \n";
             for (int i = 0; i < trips.size(); i++) {
-                cout << i + 1 << ". " << trips[i].user_name << endl;
+                cout << i + 1 << ". " << trips[i].user_name
+                     << " ,  invoice_id: " << trips[i].invoice_id
+                     << " ,  creation_date: " << trips[i].creation_date
+                     << " ,  user_name: " << trips[i].user_name
+                     << " ,  user_address: " << trips[i].user_address
+                     << " ,  phone_no: " << trips[i].phone_no
+                     << " ,  trip_start_location: " << trips[i].trip_start_location
+                     << " ,  trip_end_location: " << trips[i].trip_end_location << endl;
             }
             cout << " \n <----------- Going back to main menu ------------> \n \n";
             menu(newTravelTrip, trips);
@@ -248,17 +294,37 @@ public:
             if (addr != "X") {
                 trips[index].user_address = addr;
             }
+
+            cout << "Enter Phone Number (X to not change): ";
+            getline(cin, phone);
+            if (addr != "X") {
+                trips[index].user_address = addr;
+            }
+            cout << "\n <----------- User of username: " << trips[index].user_name
+                 << " edited successfully ------------> \n";
+            cout << " <----------- Going back to main menu ------------> \n \n";
+            menu();
+
         } else {
-            cout << "\n <----------- No users found. Please enter a valid input ------------> \n";
+            cout << "\n <----------- No user found. Please enter a valid input ------------> \n";
             cout << " <----------- Going back to main menu ------------> \n \n";
             menu();
         }
     }
 
-    static void deleteUser(const vector<TravelTrip> &trips) {
-        NewTravelTrip::search();
-        for (const auto &it : trips) {
-            cout << it.user_name;
+    static void deleteUser(vector<TravelTrip> &trips) {
+        int index = NewTravelTrip::search();
+
+        if (index >= 0) {
+            string deleted_user = trips[index].user_name;
+            trips.erase(trips.begin() + index);
+            cout << " \n <----------- user_name of: " << deleted_user << " deleted successfully ------------> \n";
+            cout << " <----------- Going back to main menu ------------> \n \n";
+            menu();
+        } else {
+            cout << "\n <----------- User not found. Please enter valid input ------------> \n";
+            cout << " <----------- Going back to main menu ------------> \n \n";
+            menu();
         }
     }
 };
@@ -268,14 +334,14 @@ void menu(NewTravelTrip newTravelTrip, vector<TravelTrip> trips_vec) {
 
     ExitMenu:
     cout << " <----------- Main menu ------------> \n \n";
-    cout << "1. New Travel Trip\n";
-    cout << "2. Show All Users\n";
-    cout << "3. Edit User\n";
-    cout << "4. Delete User\n";
-    cout << "5. Add Trip\n";
-    cout << "6. Edit Trip\n";
-    cout << "7. Delete Trip\n";
-    cout << "Enter your option: ";
+    cout << "\t1. New Travel Trip\n";
+    cout << "\t2. Show All Users\n";
+    cout << "\t3. Edit User\n";
+    cout << "\t4. Delete User\n";
+    cout << "\t5. Add Trip\n";
+    cout << "\t6. Edit Trip\n";
+    cout << "\t7. Delete Trip\n";
+    cout << "\t\n Enter your choice: ";
 
     cin >> op;
     int option = op - '0';
